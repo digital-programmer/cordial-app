@@ -13,6 +13,11 @@ module.exports.timeline = function (req, res) {
 
 // render signup page
 module.exports.signUp = (req,res) => {
+
+  if(req.isAuthenticated()) {
+    return res.redirect("/users/profile");
+  }
+
   return res.render("user_signup", {
     title: "Codial | Sign Up",
   });
@@ -20,6 +25,11 @@ module.exports.signUp = (req,res) => {
 
 // render signin page
 module.exports.signIn = (req,res) => {
+
+  if(req.isAuthenticated()) {
+    return res.redirect("/users/profile");
+  }
+
   return res.render("user_signin", {
     title: "Codial | Sign In",
   });
@@ -55,5 +65,11 @@ module.exports.create = function (req, res) {
 
 // create user session
 module.exports.createSession = function (req, res) {
-  // Later
+  return res.redirect('/');
+}
+
+// exit user session
+module.exports.destroySession = function (req, res) {
+  req.logout();
+  return res.redirect('/');
 }
