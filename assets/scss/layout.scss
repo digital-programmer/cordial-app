@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Urbanist:wght@700&display=swap');
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+
+    #layout__main {
+        height: 100vh;
+    }
+}
+
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+// common classes
+.flex {
+    display: flex;
+}
+
+.halign {
+    justify-content: center;
+}
+
+.valign {
+    align-items: center;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.pd-lg {
+    padding-left: 20px;
+    padding-right: 20px;
+}

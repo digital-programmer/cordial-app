@@ -1,0 +1,23 @@
+header {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #ff7b00;
+  color: white;
+  margin-bottom: 20px; }
+  header #logo {
+    font-family: "Urbanist", sans-serif;
+    font-weight: 700;
+    font-size: 2em;
+    cursor: pointer; }
+    header #logo a {
+      color: white; }
+  header li {
+    margin-left: 20px; }
+    header li a {
+      font-family: "Urbanist", sans-serif;
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 16px; }
+      header li a:hover {
+        color: #00177e; }
