@@ -8,9 +8,12 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
-  font-weight: 400; }
+  font-weight: 400;
+  height: 100vh; }
   body #layout__main {
-    height: 100vh; }
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
 
 li {
   list-style-type: none; }
@@ -34,3 +37,11 @@ a {
 .pd-lg {
   padding-left: 20px;
   padding-right: 20px; }
+
+#posts-list-container li {
+  margin: 50px 0; }
+  #posts-list-container li .post-comments-list {
+    margin-top: 25px; }
+
+.comment {
+  margin-top: 6px; }
