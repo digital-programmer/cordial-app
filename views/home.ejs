@@ -1,27 +1,29 @@
 <section id="feed-posts">
     <h3>Posts</h3>
-    <form action="/posts/create" id="new-post-form" method="POST">
-        <textarea name="content" cols="30" rows="5" placeholder="Type Here..."></textarea>
-        <input type="submit" value="Post">
-    </form>
+    <% if(locals.user) { %>
+        <form action="/posts/create" id="new-post-form" method="POST">
+            <textarea name="content" cols="30" rows="5" placeholder="Type Here..."></textarea>
+            <input type="submit" value="Post">
+        </form>
+        <% } %>
 
-    <div id="posts-list-container">
-        <ul>
-            <% for (post of posts) { %>
-                <li>
-                    <p>
-                        <%= post.content %>
-                            <br>
-                            <small>
-                                <%= post.user.name %>
-                            </small>
-                            <small>
-                                <%= post.updatedAt.toDateString() %>
-                            </small>
-                    </p>
+            <div id="posts-list-container">
+                <ul>
+                    <% for (post of posts) { %>
+                        <li>
+                            <p>
+                                <%= post.content %>
+                                    <br>
+                                    <small>
+                                        <%= post.user.name %>
+                                    </small>
+                                    <small>
+                                        <%= post.updatedAt.toDateString() %>
+                                    </small>
+                            </p>
 
-                </li>
-                <% } %>
-        </ul>
-    </div>
+                        </li>
+                        <% } %>
+                </ul>
+            </div>
 </section>
