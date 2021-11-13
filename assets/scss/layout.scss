@@ -11,12 +11,8 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
-    height: 100vh;
-    #layout__main {
-        display:  flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    min-height: 100vh;
+    position: relative;
 }
 
 
@@ -46,21 +42,6 @@ a {
     justify-content: space-between;
 }
 
-.pd-lg {
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-#posts-list-container {
-    li {
-        margin: 50px 0;
-
-        .post-comments-list {
-            margin-top: 25px;
-        }
-    }
-}
-
-.comment {
-    margin-top: 6px;
+#layout__main {
+    height: 100%;
 }

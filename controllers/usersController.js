@@ -1,9 +1,14 @@
 const User = require('../models/user')
 
 module.exports.profile = function (req, res) {
-  res.render("user_profile", {
-    title: "Profile",
-  });
+  User.findById(req.params.id, function (err, user) {
+    res.render("user_profile", {
+      title: "Profile",
+      profile_user: user
+    });
+  })
+
+
 };
 
 module.exports.timeline = function (req, res) {
@@ -12,9 +17,9 @@ module.exports.timeline = function (req, res) {
 
 
 // render signup page
-module.exports.signUp = (req,res) => {
+module.exports.signUp = (req, res) => {
 
-  if(req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
     return res.redirect("/users/profile");
   }
 
@@ -24,9 +29,9 @@ module.exports.signUp = (req,res) => {
 }
 
 // render signin page
-module.exports.signIn = (req,res) => {
+module.exports.signIn = (req, res) => {
 
-  if(req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
     return res.redirect("/users/profile");
   }
 
@@ -37,30 +42,30 @@ module.exports.signIn = (req,res) => {
 
 // get the signup data
 module.exports.create = function (req, res) {
-  if(req.body.password != req.body.confirm_password) {
+  if (req.body.password != req.body.confirm_password) {
     return res.redirect("back");
   }
 
-  User.findOne({email: req.body.email}, function(err,user){
-    if(err) {
+  User.findOne({ email: req.body.email }, function (err, user) {
+    if (err) {
       console.log("Error in finding user in signing up");
       return;
     }
 
-    if(!user) {
-      User.create(req.body, function (err,user){
-        if(err) {
+    if (!user) {
+      User.create(req.body, function (err, user) {
+        if (err) {
           console.log("Error in signing up user");
           return;
-        } 
-        return res.redirect("/users/sign-in");  
+        }
+        return res.redirect("/users/sign-in");
       });
     } else {
       return res.redirect("back");
     }
 
   })
- 
+
 }
 
 // create user session
@@ -72,4 +77,15 @@ module.exports.createSession = function (req, res) {
 module.exports.destroySession = function (req, res) {
   req.logout();
   return res.redirect('/');
+}
+
+// update user profile
+module.exports.update = function (req, res) {
+  if (req.user.id = req.params.id) {
+    User.findByIdAndUpdate(req.params.id, req.body, function (err, user) {
+      return res.redirect('back');
+    });
+  } else {
+    return res.status(401).send("Unauthorized access");
+  }
 }
