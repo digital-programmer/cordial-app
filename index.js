@@ -4,12 +4,14 @@ const cookieParser = require('cookie-parser');
 const expressLayouts = require("express-ejs-layouts");
 const port = 8000;
 const db = require("./config/mongoose");
+const flash = require('connect-flash');
 
 // used for session cookie
 const session = require('express-session');
 const passport = require("passport");
-const passportLocal = require("./config/passport-local-strategy"); 
+const passportLocal = require("./config/passport-local-strategy");
 const MongoStore = require('connect-mongo');
+const customWare = require("./config/middleware");
 
 const sassMiddleware = require("node-sass-middleware");
 
@@ -21,14 +23,14 @@ app.use(sassMiddleware({
   prefix: "/css"
 }));
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static("./assets"));
 app.use(expressLayouts);
 
 // extract style and scripts from subpages into the layout
-app.set('layout extractStyles',true);
-app.set('layout extractScripts',true);  
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
 
 
 
@@ -44,22 +46,25 @@ app.use(session({
   saveUninitialized: false,
   resave: false,
   cookie: {
-    maxAge: (1000* 60 *100)
+    maxAge: (1000 * 60 * 100)
   },
   store: MongoStore.create(
-  {
+    {
       client: db.getClient(),
       autoRemove: 'disabled',
-  },
-  function(err){
-    console.log(err || "connect-mongodb setup ok");
-  })
+    },
+    function (err) {
+      console.log(err || "connect-mongodb setup ok");
+    })
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
+
+app.use(flash());
+app.use(customWare.setFlash);
 
 // use express router to connect
 app.use("/", require("./routes"));
