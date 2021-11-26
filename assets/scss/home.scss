@@ -1,6 +1,7 @@
 #home-container {
     height: 100%;
 
+
     #feed-posts {
         width: 70%;
         padding: 10px;
@@ -17,4 +18,13 @@
     #posts-list-container .post {
         margin-top: 40px;
     }
+}
+
+.post {
+    background-color: rgb(236, 236, 236);
+    padding: 10px;
+}
+
+#layout__main {
+    padding-bottom: 60px;
 }
