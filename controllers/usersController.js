@@ -1,4 +1,6 @@
 const User = require('../models/user')
+const fs = require('fs');
+const path = require('path');
 
 module.exports.profile = function (req, res) {
   User.findById(req.params.id, function (err, user) {
@@ -82,12 +84,43 @@ module.exports.destroySession = function (req, res) {
 }
 
 // update user profile
-module.exports.update = function (req, res) {
-  if (req.user.id = req.params.id) {
-    User.findByIdAndUpdate(req.params.id, req.body, function (err, user) {
+module.exports.update = async function (req, res) {
+
+  if (req.user.id == req.params.id) {
+    try {
+
+      let user = await User.findById(req.params.id);
+      User.uploadedAvatar(req, res, (err) => {
+        if (err) {
+          console.log("****Multer Error*****", err);
+          return res.redirect('back');
+        }
+
+        user.name = req.body.name;
+        user.email = req.body.email;
+        if (req.file) {
+
+          if (user.avatar) {
+            let filepathToBeDeleted = path.join(__dirname, "..", user.avatar);
+            fs.unlinkSync(filepathToBeDeleted);
+          }
+
+          // saving the path of the uploaded file into the avatar field of user
+          user.avatar = User.avatarPath + '/' + req.file.filename;
+        }
+
+        user.save();
+        return res.redirect('back');
+      });
+
+
+    } catch (err) {
+      req.flash('error', err);
       return res.redirect('back');
-    });
+    }
+
   } else {
     return res.status(401).send("Unauthorized access");
   }
+
 }
