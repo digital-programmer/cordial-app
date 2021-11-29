@@ -1,27 +1,30 @@
 <link rel="stylesheet" href="/css/auth.css">
 
 <form action="/users/create-session" method="post" style="border:1px solid #ccc" autocomplete="off">
-    <div class="container">
-      <h1>Sign In</h1>
-      <p>Welcome back!</p>
-      <hr> 
-  
-      <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" required>
-  
-      <label for="password"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="password" required>
-      
-      <label>
-        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-      </label>
+  <div class="container">
+    <h1>Sign In</h1>
+    <p>Welcome back!</p>
+    <hr>
 
-      <div class="clearfix">
-        <button type="submit" class="signinbtn">Sign In</button>
-      </div>
-      
-      <p>Don't have an account? <a href="/users/sign-up" style="color:dodgerblue">Sign Up</a></p>
-  
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
 
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" required>
+
+    <label>
+      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+    </label>
+
+    <div class="clearfix">
+      <button type="submit" class="signinbtn">Sign In</button>
     </div>
+
+    <p>Don't have an account? <a href="/users/sign-up" style="color:dodgerblue">Sign Up</a></p>
+
+
+  </div>
 </form>
+<p>
+  <a href="/users/auth/google"> Google sign-In / Sign-up</a>
+</p>
