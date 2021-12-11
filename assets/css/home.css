@@ -16,3 +16,15 @@
 
 #layout__main {
   padding-bottom: 60px; }
+
+.comment-count,
+.post-count {
+  margin-right: 6px; }
+
+.post-stats img,
+.comment-stats img {
+  cursor: pointer;
+  padding: 5px; }
+
+.liked {
+  border-bottom: 4px solid black; }
